@@ -41,6 +41,9 @@ class CustomBottomSheet extends ChangeNotifier {
   ///snap to specific position
   late void Function(double toHeight) snapToPosition;
 
+  ///refresh widget
+  late void Function() refresh;
+
   ///init bottomSheet
   init({Widget Function(BuildContext, Widget?)? builder}) {
     return (BuildContext context, Widget? child) {
@@ -60,17 +63,16 @@ class CustomBottomSheet extends ChangeNotifier {
         widget != null
             ? Positioned(
                 bottom: 0,
-                child: CustomBottomSheetWidget(
-                    widget: widget!, barrierDismissible: barrierDismissible),
+                child: CustomBottomSheetWidget(),
               )
             : const SizedBox()
       ],
     );
   }
 
-  ///set widget and notify bottomsheet
+  ///set widget and refresh bottomsheet
   void setWidget(Widget widget) {
     instance.widget = widget;
-    notifyListeners();
+    refresh();
   }
 }

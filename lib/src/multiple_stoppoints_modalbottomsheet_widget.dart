@@ -6,13 +6,8 @@ import '../multiple_stoppoints_modalbottomsheet.dart';
 
 //// CustomBottomSheet Widget
 class CustomBottomSheetWidget extends StatefulWidget {
-  /// widget to display
-  final Widget widget;
-
   /// Option to dismiss bottomSheet if click outside of this widget
-  final bool? barrierDismissible;
-  const CustomBottomSheetWidget(
-      {super.key, this.barrierDismissible, required this.widget});
+  const CustomBottomSheetWidget({super.key});
 
   @override
   State<CustomBottomSheetWidget> createState() =>
@@ -48,6 +43,7 @@ class _CustomBottomSheetWidgetState extends State<CustomBottomSheetWidget>
     scnHeight = window.physicalSize.longestSide / window.devicePixelRatio;
     //init method
     bottomSheet.snapToPosition = snapToPosition;
+    bottomSheet.refresh = refresh;
     //set maxHeight to scnHeight
     if (bottomSheet.maxHeight == double.infinity) {
       bottomSheet.maxHeight = scnHeight;
@@ -57,6 +53,10 @@ class _CustomBottomSheetWidgetState extends State<CustomBottomSheetWidget>
         bottomSheet.stopPoints[i] = scnHeight;
       }
     }
+  }
+
+  void refresh() {
+    setState(() {});
   }
 
   @override
@@ -139,7 +139,7 @@ class _CustomBottomSheetWidgetState extends State<CustomBottomSheetWidget>
                   height: bottomSheet.height.value,
                   width: MediaQuery.of(context).size.width,
                   color: Colors.pink,
-                  child: widget.widget,
+                  child: bottomSheet.widget,
                 );
               },
             )));
@@ -181,8 +181,8 @@ class _CustomBottomSheetWidgetState extends State<CustomBottomSheetWidget>
 
   ///event when user tap outside
   void onTapOutside(PointerDownEvent event) {
-    if (widget.barrierDismissible != null) {
-      if (widget.barrierDismissible!) {
+    if (bottomSheet.barrierDismissible != null) {
+      if (bottomSheet.barrierDismissible!) {
         snapToPosition(0);
       }
     }
