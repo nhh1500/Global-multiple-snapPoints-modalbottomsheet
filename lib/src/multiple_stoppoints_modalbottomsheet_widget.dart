@@ -161,7 +161,7 @@ class _CustomBottomSheetWidgetState extends State<CustomBottomSheetWidget>
       controller!.dispose();
     }
     controller = AnimationController(
-        vsync: this, duration: CustomBottomSheet.instance!.duration);
+        vsync: this, duration: CustomBottomSheet.instance.duration);
     _animation = Tween<double>(begin: bottomSheet.height.value, end: toHeight)
         .animate(CurvedAnimation(parent: controller!, curve: Curves.easeOut))
       ..addListener(() {

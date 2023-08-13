@@ -2,39 +2,40 @@ import 'package:flutter/widgets.dart';
 
 import '../multiple_stoppoints_modalbottomsheet.dart';
 
+/// initialize CustomBottomSheet parameter before use
 class CustomBottomSheet extends ChangeNotifier {
-  static CustomBottomSheet? _instance;
-  static CustomBottomSheet? get instance => _instance;
+  static final CustomBottomSheet _instance =
+      CustomBottomSheet._privateConstructor();
+  static CustomBottomSheet get instance => _instance;
+
+  ///animation duration
   Duration duration = const Duration(microseconds: 200);
+
+  ///if swipe speed higher than the value of sensitivity, then it will go to the less stopPoints
   double sensitivity = 500;
+
+  /// do not modify this value, it used by the bottomsheet widget
   ValueNotifier<double> height = ValueNotifier<double>(0);
+
+  ///minHeight of the bottomSheet
   double minHeight = 0;
+
+  ///maxHeight of the bottomSheet
   double maxHeight = double.infinity;
+
+  ///multiple stopPoints for the bottomSheet
   List<double> stopPoints = [0, double.infinity];
+
+  ///widget that show in the bottomSheet
   Widget? widget;
+
+  ///whether to dismiss bottomSheet if tap outside
+  bool? barrierDismissible;
+
+  /// return `true` if bottomSheet is open, otherwise return `false`
   bool get isOpen => height.value != 0 ? true : false;
 
-  factory CustomBottomSheet(
-      {Widget? widget,
-      List<double> stopPoints = const [0, double.infinity],
-      double sensitivity = 500,
-      Duration duration = const Duration(milliseconds: 200),
-      double minHeight = 0,
-      double maxHeight = double.infinity}) {
-    if (minHeight < 0) {
-      throw Exception('minHeight cannot less then zero.');
-    }
-    if (_instance == null) {
-      _instance = CustomBottomSheet._privateConstructor();
-      _instance?.widget = widget;
-      _instance?.stopPoints = stopPoints;
-      _instance?.sensitivity = sensitivity;
-      _instance?.duration = duration;
-      _instance?.minHeight = minHeight;
-      _instance?.maxHeight = maxHeight;
-    }
-    return _instance!;
-  }
+  factory CustomBottomSheet() => _instance;
   CustomBottomSheet._privateConstructor();
 
   ///snap to specific position
@@ -59,17 +60,17 @@ class CustomBottomSheet extends ChangeNotifier {
         widget != null
             ? Positioned(
                 bottom: 0,
-                child: CustomBottomSheetWidget(widget: widget!),
+                child: CustomBottomSheetWidget(
+                    widget: widget!, barrierDismissible: barrierDismissible),
               )
             : const SizedBox()
       ],
     );
   }
 
+  ///set widget and notify bottomsheet
   void setWidget(Widget widget) {
-    if (_instance != null) {
-      instance!.widget = widget;
-    }
+    instance.widget = widget;
     notifyListeners();
   }
 }

@@ -4,7 +4,17 @@ import 'package:multiple_stoppoints_modalbottomsheet/multiple_stoppoints_modalbo
 import 'childWidget.dart';
 
 void main() {
+  configBottomSheet();
   runApp(const MyApp());
+}
+
+void configBottomSheet() {
+  CustomBottomSheet.instance
+    ..sensitivity = 500
+    ..duration = Duration(milliseconds: 20)
+    ..stopPoints = [0, 50, 500, double.infinity]
+    ..widget = ChildWidget(color: Colors.amber)
+    ..barrierDismissible = false;
 }
 
 class MyApp extends StatelessWidget {
@@ -12,14 +22,8 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    CustomBottomSheet(
-        sensitivity: 500,
-        stopPoints: [0, 50, 500, double.infinity],
-        widget: ChildWidget(
-          color: Colors.amber,
-        ));
     return MaterialApp(
-      builder: CustomBottomSheet.instance!.init(),
+      builder: CustomBottomSheet.instance.init(),
       title: 'Flutter Demo',
       theme: ThemeData(),
       home: const HomePage(),
@@ -35,8 +39,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  CustomBottomSheet controller = CustomBottomSheet();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,24 +57,26 @@ class _HomePageState extends State<HomePage> {
           ),
           ElevatedButton(
               onPressed: () {
-                if (controller.height.value == 0) {
-                  controller.snapToPosition(50);
+                if (!CustomBottomSheet.instance.isOpen) {
+                  CustomBottomSheet.instance.snapToPosition(50);
                 }
               },
               child: const Text('show')),
           ElevatedButton(
               onPressed: () {
-                controller.snapToPosition(0);
+                CustomBottomSheet.instance.snapToPosition(0);
               },
               child: const Text('dismiss')),
           ElevatedButton(
               onPressed: () {
-                controller.setWidget(const ChildWidget(color: Colors.green));
+                CustomBottomSheet.instance
+                    .setWidget(const ChildWidget(color: Colors.green));
               },
               child: const Text('green')),
           ElevatedButton(
               onPressed: () {
-                controller.setWidget(const ChildWidget(color: Colors.yellow));
+                CustomBottomSheet.instance
+                    .setWidget(const ChildWidget(color: Colors.yellow));
               },
               child: const Text('yellow')),
           ElevatedButton(
