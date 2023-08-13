@@ -1,0 +1,17 @@
+name: multiple_stoppoints_modalbottomsheet
+description: ModalBottomSheet that support multiple stopPoints, overlay widget in all pages.
+version: 1.0.0
+# repository: https://github.com/my_org/my_repo
+
+environment:
+  sdk: '>=2.19.6 <3.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  lints: ^2.0.0
+  test: ^1.21.0
