@@ -12,7 +12,7 @@ void main() {
 void configBottomSheet() {
   CustomBottomSheet.instance
     ..sensitivity = 500
-    ..duration = Duration(milliseconds: 20)
+    ..duration = const Duration(seconds: 2)
     ..snapHeight = [
       SnapHeight(0),
       SnapHeight(0.1, minHeight: 50, maxHeight: 50),
@@ -64,7 +64,7 @@ class _HomePageState extends State<HomePage> {
           ElevatedButton(
               onPressed: () {
                 if (!CustomBottomSheet.instance.isOpen) {
-                  CustomBottomSheet.instance.snapToHeight(50);
+                  CustomBottomSheet.instance.snapToIndex(1);
                 }
               },
               child: const Text('show')),
