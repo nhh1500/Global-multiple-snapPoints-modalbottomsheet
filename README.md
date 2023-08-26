@@ -1,4 +1,4 @@
-# multiple-stopPoints-modalbottomsheet
+# Global-multiple-snapHeights-modalbottomsheet
 <img src="https://media.discordapp.net/attachments/343876281793773578/1140280974253498479/Recording_2023-08-13_at_21.49.01.gif" width=200 height=429/>
 
 ## Installing
