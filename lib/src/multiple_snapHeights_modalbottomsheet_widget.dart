@@ -195,11 +195,17 @@ class _SnapHeightBottomSheetWidgetState
         .animate(CurvedAnimation(parent: controller!, curve: Curves.easeOut))
       ..addListener(() {
         bottomSheet.height.value = _animation!.value;
+        if (CustomBottomSheet.instance.onDragging != null) {
+          CustomBottomSheet.instance.onDragging!(currentSnapStatus);
+        }
       });
     _animation?.addStatusListener((status) {
       if (status == AnimationStatus.completed ||
           status == AnimationStatus.dismissed) {
         CustomBottomSheet.instance.animating = false;
+        if (CustomBottomSheet.instance.dragEnd != null) {
+          CustomBottomSheet.instance.dragEnd!(currentSnapStatus);
+        }
       } else {
         CustomBottomSheet.instance.animating = true;
       }

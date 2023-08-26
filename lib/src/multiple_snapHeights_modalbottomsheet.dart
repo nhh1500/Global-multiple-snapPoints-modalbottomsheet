@@ -66,13 +66,13 @@ class CustomBottomSheet {
   }
 
   /// call back when dragging
-  Function(SnapStatus status)? onDragging;
+  void Function(SnapStatus status)? onDragging;
 
   ///call back when drag Start
-  Function(SnapStatus status)? dragStart;
+  void Function(SnapStatus status)? dragStart;
 
   /// call back when drag end
-  Function(SnapStatus status)? dragEnd;
+  void Function(SnapStatus status)? dragEnd;
 
   ///init bottomSheet
   init({Widget Function(BuildContext, Widget?)? builder}) {
