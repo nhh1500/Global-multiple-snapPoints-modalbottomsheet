@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:multiple_stoppoints_modalbottomsheet/multiple_stoppoints_modalbottomsheet.dart';
+import 'package:multiple_stoppoints_modalbottomsheet/multiple_snapHeights_modalbottomsheet.dart';
+import 'package:multiple_stoppoints_modalbottomsheet/src/model/snapHeight.dart';
 
 import 'childWidget.dart';
 
@@ -12,7 +13,12 @@ void configBottomSheet() {
   CustomBottomSheet.instance
     ..sensitivity = 500
     ..duration = Duration(milliseconds: 20)
-    ..stopPoints = [0, 50, 500, double.infinity]
+    ..snapHeight = [
+      SnapHeight(0),
+      SnapHeight(0.1, minHeight: 50, maxHeight: 50),
+      SnapHeight(0.5),
+      SnapHeight(1)
+    ]
     ..widget = ChildWidget(color: Colors.amber)
     ..barrierDismissible = false;
 }
@@ -58,13 +64,13 @@ class _HomePageState extends State<HomePage> {
           ElevatedButton(
               onPressed: () {
                 if (!CustomBottomSheet.instance.isOpen) {
-                  CustomBottomSheet.instance.snapToPosition(50);
+                  CustomBottomSheet.instance.snapToHeight(50);
                 }
               },
               child: const Text('show')),
           ElevatedButton(
               onPressed: () {
-                CustomBottomSheet.instance.snapToPosition(0);
+                CustomBottomSheet.instance.snapToHeight(0);
               },
               child: const Text('dismiss')),
           ElevatedButton(

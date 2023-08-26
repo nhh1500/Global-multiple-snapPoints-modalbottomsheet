@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:multiple_stoppoints_modalbottomsheet/multiple_stoppoints_modalbottomsheet.dart';
+import 'package:multiple_stoppoints_modalbottomsheet/multiple_snapHeights_modalbottomsheet.dart';
 
 ///example child widget
 class ChildWidget extends StatelessWidget {
@@ -96,7 +96,7 @@ class ChildWidget extends StatelessWidget {
                     Expanded(
                         child: Opacity(
                       opacity: CustomBottomSheet.instance.height.value /
-                          CustomBottomSheet.instance.maxHeight,
+                          MediaQuery.of(context).size.height,
                       child: SingleChildScrollView(
                         primary: true,
                         child: Container(

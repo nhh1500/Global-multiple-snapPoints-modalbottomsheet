@@ -1,9 +1,11 @@
 import 'package:flutter/widgets.dart';
+import 'package:multiple_stoppoints_modalbottomsheet/src/model/snapHeight.dart';
+import 'package:multiple_stoppoints_modalbottomsheet/src/model/snapStatus.dart';
 
-import '../multiple_stoppoints_modalbottomsheet.dart';
+import '../multiple_snapHeights_modalbottomsheet.dart';
 
 /// initialize CustomBottomSheet parameter before use
-class CustomBottomSheet extends ChangeNotifier {
+class CustomBottomSheet {
   static final CustomBottomSheet _instance =
       CustomBottomSheet._privateConstructor();
   static CustomBottomSheet get instance => _instance;
@@ -14,17 +16,13 @@ class CustomBottomSheet extends ChangeNotifier {
   ///if swipe speed higher than the value of sensitivity, then it will go to the less stopPoints
   double sensitivity = 500;
 
-  /// do not modify this value, it used by the bottomsheet widget
-  ValueNotifier<double> height = ValueNotifier<double>(0);
+  /// do not modify this value, it used by animation
+  final ValueNotifier<double> _height = ValueNotifier<double>(0);
 
-  ///minHeight of the bottomSheet
-  double minHeight = 0;
+  ValueNotifier<double> get height => _height;
 
-  ///maxHeight of the bottomSheet
-  double maxHeight = double.infinity;
-
-  ///multiple stopPoints for the bottomSheet
-  List<double> stopPoints = [0, double.infinity];
+  ///multiple snap height for the bottomSheet
+  List<SnapHeight>? snapHeight;
 
   ///widget that show in the bottomSheet
   Widget? widget;
@@ -35,14 +33,46 @@ class CustomBottomSheet extends ChangeNotifier {
   /// return `true` if bottomSheet is open, otherwise return `false`
   bool get isOpen => height.value != 0 ? true : false;
 
-  factory CustomBottomSheet() => _instance;
-  CustomBottomSheet._privateConstructor();
+  ///minHeight for this bottomSheet
+  double? minHeight;
 
-  ///snap to specific position
-  late void Function(double toHeight) snapToPosition;
+  ///maxHeight for this bottomSheet
+  double? maxHeight;
+
+  ///snap to specific height, should be between 0 and 1
+  late void Function(double toHeight) snapToHeight;
+
+  ///snap to actual height in pixel
+  late void Function(double toHeight) snapToActualHeight;
+
+  ///snap to `index` which is corresponding to `snapHeight`
+  late void Function(int index) snapToIndex;
 
   ///refresh widget
   late void Function() refresh;
+
+  ///dismissAction
+  void Function()? onDismiss;
+
+  /// animation status
+  bool animating = false;
+
+  factory CustomBottomSheet() => _instance;
+  CustomBottomSheet._privateConstructor();
+
+  ///set bottomSheet height
+  void setHeight(double height) {
+    _height.value = height;
+  }
+
+  /// call back when dragging
+  Function(SnapStatus status)? onDragging;
+
+  ///call back when drag Start
+  Function(SnapStatus status)? dragStart;
+
+  /// call back when drag end
+  Function(SnapStatus status)? dragEnd;
 
   ///init bottomSheet
   init({Widget Function(BuildContext, Widget?)? builder}) {
@@ -73,6 +103,11 @@ class CustomBottomSheet extends ChangeNotifier {
   ///set widget and refresh bottomsheet
   void setWidget(Widget widget) {
     instance.widget = widget;
+    refresh();
+  }
+
+  ///refresh bottomSheet
+  void setState() {
     refresh();
   }
 }
