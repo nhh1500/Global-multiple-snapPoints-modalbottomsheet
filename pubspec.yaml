@@ -1,7 +1,7 @@
-name: multiple_stoppoints_modalbottomsheet
-description: ModalBottomSheet that support multiple stopPoints, overlay widget in all pages.
+name: global-multiple-snapPoints-modalbottomsheet
+description: ModalBottomSheet that support multiple snapPoints, overlay widget in all pages.
 version: 1.0.0
-homepage: https://github.com/nhh1500/multiple-stopPoints-modalbottomsheet
+homepage: https://github.com/nhh1500/Global-multiple-snapPoints-modalbottomsheet
 
 environment:
   sdk: '>=3.0.0 <4.0.0'
