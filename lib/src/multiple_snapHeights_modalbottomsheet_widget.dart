@@ -1,22 +1,22 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:multiple_stoppoints_modalbottomsheet/src/model/snapStatus.dart';
+import 'package:global_multiple_snapheights_modalbottomsheet/src/model/snapStatus.dart';
 
 import '../multiple_snapHeights_modalbottomsheet.dart';
 
 //// CustomBottomSheet Widget
-class CustomBottomSheetWidget extends StatefulWidget {
+class SnapHeightBottomSheetWidget extends StatefulWidget {
   /// Option to dismiss bottomSheet if click outside of this widget
-  const CustomBottomSheetWidget({super.key});
+  const SnapHeightBottomSheetWidget({super.key});
 
   @override
-  State<CustomBottomSheetWidget> createState() =>
-      _CustomBottomSheetWidgetState();
+  State<SnapHeightBottomSheetWidget> createState() =>
+      _SnapHeightBottomSheetWidgetState();
 }
 
-class _CustomBottomSheetWidgetState extends State<CustomBottomSheetWidget>
-    with TickerProviderStateMixin {
+class _SnapHeightBottomSheetWidgetState
+    extends State<SnapHeightBottomSheetWidget> with TickerProviderStateMixin {
   ///main controller
   CustomBottomSheet bottomSheet = CustomBottomSheet();
 

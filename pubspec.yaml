@@ -1,6 +1,6 @@
-name: global-multiple-snapPoints-modalbottomsheet
-description: ModalBottomSheet that support multiple snapPoints, overlay widget in all pages.
-version: 1.0.0
+name: global_multiple_snapheights_modalbottomsheet
+description: ModalBottomSheet that support multiple snapHeights, overlay widget in all pages.
+version: 2.0.0
 homepage: https://github.com/nhh1500/Global-multiple-snapPoints-modalbottomsheet
 
 environment:

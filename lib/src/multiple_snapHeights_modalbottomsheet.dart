@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
-import 'package:multiple_stoppoints_modalbottomsheet/src/model/snapHeight.dart';
-import 'package:multiple_stoppoints_modalbottomsheet/src/model/snapStatus.dart';
+import 'package:global_multiple_snapheights_modalbottomsheet/src/model/snapHeight.dart';
+import 'package:global_multiple_snapheights_modalbottomsheet/src/model/snapStatus.dart';
 
 import '../multiple_snapHeights_modalbottomsheet.dart';
 
@@ -93,7 +93,7 @@ class CustomBottomSheet {
         widget != null
             ? Positioned(
                 bottom: 0,
-                child: CustomBottomSheetWidget(),
+                child: SnapHeightBottomSheetWidget(),
               )
             : const SizedBox()
       ],

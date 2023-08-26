@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:multiple_stoppoints_modalbottomsheet/multiple_snapHeights_modalbottomsheet.dart';
-import 'package:multiple_stoppoints_modalbottomsheet/src/model/snapHeight.dart';
+import 'package:global_multiple_snapheights_modalbottomsheet/multiple_snapHeights_modalbottomsheet.dart';
+import 'package:global_multiple_snapheights_modalbottomsheet/src/model/snapHeight.dart';
 
 import 'childWidget.dart';
 
