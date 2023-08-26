@@ -5,19 +5,27 @@
 Add this yo your package's `pubspec.yaml` file:
 ```yaml
 dependencies:
-  multiple_stoppoints_modalbottomsheet:
+  global_multiple_snapheights_modalbottomsheet:
     git:
-      url: https://github.com/nhh1500/multiple-stopPoints-modalbottomsheet
+      url: https://github.com/nhh1500/Global-multiple-snapPoints-modalbottomsheet
 ```
 
 ### How to use
 Frist, initialize `CustomBottomSheet` before `runApp`
 ```dart
 CustomBottomSheet.instance
-    ..duration = Duration(milliseconds: 20)
-    ..stopPoints = [0, 50, 500, double.infinity]
-    ..widget = ChildWidget(color: Colors.amber)
+    ..sensitivity = 500
+    ..duration = const Duration(seconds: 2)
+    ..snapHeight = [
+      SnapHeight(0),
+      SnapHeight(0.1, minHeight: 50, maxHeight: 50),
+      SnapHeight(0.5),
+      SnapHeight(1)
+    ]
+    ..widget = const ChildWidget(color: Colors.amber)
     ..barrierDismissible = false;
+  CustomBottomSheet.instance.dragStart = dragStart;
+  CustomBottomSheet.instance.onDragging = dragging;
 ```
 Then, initialize in your `MaterialApp` / `CupertinoApp`
 ```dart
@@ -33,6 +41,8 @@ Then, initialize in your `MaterialApp` / `CupertinoApp`
 ```
 Standard Controls:
 ```dart
-CustomBottomSheet.instance.snapToPosition(0);
+CustomBottomSheet.instance.snapToIndex(1);
+CustomBottomSheet.instance.snapToHeight(0.5);
+CustomBottomSheet.instance.snapToActualHeight(500);
 CustomBottomSheet.instance.setWidget(const ChildWidget(color: Colors.green));
 ```
